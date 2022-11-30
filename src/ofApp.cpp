@@ -6,8 +6,8 @@
 //  Octree Test - startup scene
 // 
 //
-//  Student Name:   < Your Name goes Here >
-//  Date: <date of last version>
+//  Student Name:  Victor mendoza 
+//  Date: 11/18/2022
 
 
 #include "ofApp.h"
@@ -44,13 +44,16 @@ void ofApp::setup(){
 	// create sliders for testing
 	//
 	gui.setup();
-	gui.add(numLevels.setup("Number of Octree Levels", 1, 1, 10));
+	gui.add(numLevels.setup("Number of Octree Levels", 1, 1, maxLevels));
 	bHide = false;
 
 	//  Create Octree for testing.
 	//
-	
+	float start = ofGetElapsedTimef();
 	octree.create(mars.getMesh(0), 20);
+	float end = ofGetElapsedTimef();
+	cout << "Octree Creation Time Elapsed: " << end - start << " seconds\n";
+
 	
 	cout << "Number of Verts: " << mars.getMesh(0).getNumVertices() << endl;
 
@@ -143,8 +146,10 @@ void ofApp::draw() {
 	// recursively draw octree
 	//
 	ofDisableLighting();
-	int level = 0;
-	//	ofNoFill();
+	ofSetColor(ofColor::white);
+	//int level = 2;
+	ofNoFill();
+	//octree.draw(maxLevels,numLevels);
 
 	if (bDisplayLeafNodes) {
 		octree.drawLeafNodes(octree.root);
@@ -334,7 +339,10 @@ void ofApp::mousePressed(int x, int y, int button) {
 	}
 	else {
 		ofVec3f p;
+		float start = ofGetElapsedTimeMicros();
 		raySelectWithOctree(p);
+		float end = ofGetElapsedTimeMicros();
+		cout << "Ray Intersection Time Elapsed: " << end - start << " microseconds\n";
 	}
 }
 

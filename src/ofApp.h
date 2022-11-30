@@ -66,6 +66,7 @@ class ofApp : public ofBaseApp{
 		
 		bool bLanderLoaded;
 		bool bTerrainSelected;
+		int maxLevels = 10;
 	
 		ofVec3f selectedPoint;
 		ofVec3f intersectPoint;

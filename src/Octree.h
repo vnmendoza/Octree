@@ -43,6 +43,7 @@ public:
 	ofMesh mesh;
 	TreeNode root;
 	bool bUseFaces = false;
+	vector<Box> boxList;
 
 	// debug;
 	//
